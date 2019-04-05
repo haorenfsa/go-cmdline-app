@@ -3,15 +3,15 @@ package main
 import (
 	"flag"
 
-	APP "github.com/haorenfsa/go-cmdline-app/app"
-	"github.com/haorenfsa/go-cmdline-app/examples"
+	"github.com/haorenfsa/go-cmdline-app/app"
+	"github.com/haorenfsa/go-cmdline-app/templates"
 )
 
 // main is a template main func
 func main() {
-	app := examples.NewAPP()
-	app.SetFlags()
+	templateAPP := templates.NewAPP()
+	templateAPP.SetFlags()
 	flag.Parse()
-	go app.Run()
-	APP.StartDealWithCmdSets(app)
+	go templateAPP.Run()
+	app.StartDealWithCmdSets(templateAPP)
 }

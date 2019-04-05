@@ -1,13 +1,35 @@
-package examples
+# go cmdline app
+## Purpose
+This package is mean to help us quickly establish an cmdline app with basic functions like
+- run a main function
+- read flags in cmdline input arguments
+- detect what user has input in stdin, and deal with them
 
+## How to use
+- just implement interfaces in app/interfaces.go
+- and use main func to run them
+- there is a template of main in main_template.go
+- there is also a echo app example in examples folder
+- and a template of app implementation
+```go
 import (
 	"flag"
-	"fmt"
-	"os"
 
 	"github.com/haorenfsa/go-cmdline-app/app"
+	"github.com/haorenfsa/go-cmdline-app/templates"
 )
 
+// main is a template main func
+func main() {
+	templateAPP := templates.NewAPP()
+	templateAPP.SetFlags()
+	flag.Parse()
+	go templateAPP.Run()
+	app.StartDealWithCmdSets(templateAPP)
+}
+```
+
+```go
 // Flags are the flags given in cmdline
 type Flags struct {
 	Banner *string
@@ -41,3 +63,4 @@ func (a *APP) RunOnCmdSet(cmdSet app.CmdSet) {
 		os.Exit(0)
 	}
 }
+```
